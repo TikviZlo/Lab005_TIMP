@@ -1,3 +1,4 @@
+[![Coverage Status](https://coveralls.io/repos/github/TikviZlo/Lab005_TIMP/badge.svg?branch=master)](https://coveralls.io/github/TikviZlo/Lab005_TIMP?branch=master)
 ## 1. В коде Transactions.cpp была ошибка
 
 В 39 строчке программы стояла to, а не from из-за чего изначально летали все тесты.
