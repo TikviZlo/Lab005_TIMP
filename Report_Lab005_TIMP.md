@@ -123,7 +123,7 @@ TEST(BankTest, Account) {
     t1.Unlock();
 }
 ```
-4. Создать директорию .github\workflows и написать actions.yml:
+## 4. Создать директорию .github\workflows и написать actions.yml:
 
 ```name: Bank
 on: [ push ]
