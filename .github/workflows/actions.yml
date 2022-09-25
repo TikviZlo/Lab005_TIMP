@@ -1,0 +1,32 @@
+name: Bank
+on: [ push ]
+jobs:
+  BuildTest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: prepare
+        run: |
+          sudo apt-get install lcov
+      - name: building
+        run: |
+          mkdir banking/build && cd banking/build
+          cmake -DBUILD_TESTS=ON -DCOVERALLS=ON ..
+          make
+      - name: test
+        run: |
+          cd banking/build
+          ctest
+      - name: coverage
+        run: |
+          mkdir coverage
+          lcov -d . -t bank_test -o coverage/lcov.info  -b . -c --no-external
+          lcov --remove coverage/lcov.info '*/gmock/*' '*/gtest/*' '*/include/*' -o coverage/lcov.info
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@1.1.3
+        with:
+          github-token: ${{ github.token }}
